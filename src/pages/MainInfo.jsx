@@ -1,5 +1,5 @@
 import React from 'react';
-import introduction from '../Images/About Us/introduction.jpg';
+import introduction from '../Images/About Us/Introduction.jpg';
 import second_photo from '../Images/About Us/second_photo.jpg';
 
 const MainInfo = () => {
