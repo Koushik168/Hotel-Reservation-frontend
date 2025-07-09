@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
@@ -6,6 +6,7 @@ import { HiMenu, HiX } from 'react-icons/hi';
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     // Check localStorage for login state
@@ -39,6 +40,15 @@ const Header = () => {
     };
 
     checkTokenValidity();
+  }, [location]);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const loginStatus = localStorage.getItem('isLoggedIn') === 'true';
+      setIsLoggedIn(loginStatus);
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const handleLogout = async () => {
